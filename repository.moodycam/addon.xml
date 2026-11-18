@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.moodycam" name="MoodyCam Repository" version="1.0.0" provider-name="moodyjim">
+  <extension point="xbmc.addon.repository" name="MoodyCam Repository">
+    <dir>
+      <info compressed="false">https://moodyjim.github.io/moodycam/addons.xml</info>
+      <checksum>https://moodyjim.github.io/moodycam/addons.xml.md5</checksum>
+      <datadir zip="true">https://moodyjim.github.io/moodycam/</datadir>
+    </dir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Installs and updates MoodyCam</summary>
+    <description lang="en_GB">Kodi repository for MoodyCam, the UniFi Protect camera pop-up. Install this once and Kodi keeps MoodyCam up to date.</description>
+    <platform>all</platform>
+    <license>MIT</license>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
+  </extension>
+</addon>

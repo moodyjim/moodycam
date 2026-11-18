@@ -1,0 +1,148 @@
+# MoodyCam language file
+msgid ""
+msgstr ""
+"Project-Id-Version: service.moodycam\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_GB\n"
+
+msgctxt "#32000"
+msgid "Connection"
+msgstr ""
+
+msgctxt "#32001"
+msgid "Protect address (IP or domain name)"
+msgstr ""
+
+msgctxt "#32002"
+msgid "API key"
+msgstr ""
+
+msgctxt "#32003"
+msgid "Check the security certificate"
+msgstr ""
+
+msgctxt "#32010"
+msgid "Alerts"
+msgstr ""
+
+msgctxt "#32011"
+msgid "Cameras to watch (names, comma-separated; blank = all)"
+msgstr ""
+
+msgctxt "#32012"
+msgid "Person"
+msgstr ""
+
+msgctxt "#32013"
+msgid "Vehicle"
+msgstr ""
+
+msgctxt "#32014"
+msgid "Animal"
+msgstr ""
+
+msgctxt "#32015"
+msgid "Package"
+msgstr ""
+
+msgctxt "#32016"
+msgid "Doorbell ring"
+msgstr ""
+
+msgctxt "#32017"
+msgid "Any motion (noisy)"
+msgstr ""
+
+msgctxt "#32018"
+msgid "Wait before the same camera pops up again (seconds)"
+msgstr ""
+
+msgctxt "#32019"
+msgid "Quiet hours"
+msgstr ""
+
+msgctxt "#32020"
+msgid "Quiet hours start (hour, 0-23)"
+msgstr ""
+
+msgctxt "#32021"
+msgid "Quiet hours end (hour, 0-23)"
+msgstr ""
+
+msgctxt "#32022"
+msgid "Pop up for"
+msgstr ""
+
+msgctxt "#32030"
+msgid "Pop-up"
+msgstr ""
+
+msgctxt "#32031"
+msgid "Stay on screen (seconds)"
+msgstr ""
+
+msgctxt "#32032"
+msgid "Position"
+msgstr ""
+
+msgctxt "#32033"
+msgid "Size"
+msgstr ""
+
+msgctxt "#32034"
+msgid "Picture refresh (milliseconds)"
+msgstr ""
+
+msgctxt "#32035"
+msgid "High-quality pictures (slower)"
+msgstr ""
+
+msgctxt "#32036"
+msgid "Pause what's playing while it's up"
+msgstr ""
+
+msgctxt "#32040"
+msgid "Top right"
+msgstr ""
+
+msgctxt "#32041"
+msgid "Top left"
+msgstr ""
+
+msgctxt "#32042"
+msgid "Bottom right"
+msgstr ""
+
+msgctxt "#32043"
+msgid "Bottom left"
+msgstr ""
+
+msgctxt "#32044"
+msgid "Small"
+msgstr ""
+
+msgctxt "#32045"
+msgid "Medium"
+msgstr ""
+
+msgctxt "#32046"
+msgid "Large"
+msgstr ""
+
+msgctxt "#32050"
+msgid "Tools"
+msgstr ""
+
+msgctxt "#32051"
+msgid "Show a test pop-up"
+msgstr ""
+
+msgctxt "#32052"
+msgid "List my cameras"
+msgstr ""
+
+msgctxt "#32053"
+msgid "Log every event (for troubleshooting)"
+msgstr ""

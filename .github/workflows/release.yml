@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the tag matches addon.xml
+        run: |
+          version=$(sed -n 's/.*<addon [^>]*version="\([^"]*\)".*/\1/p' addon.xml | head -n1)
+          tag="${GITHUB_REF_NAME#v}"
+          echo "addon.xml version: $version, tag: $tag"
+          if [ "$version" != "$tag" ]; then
+            echo "::error::Tag v$tag doesn't match addon.xml version $version"
+            exit 1
+          fi
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: Build the Kodi repository site and zips
+        run: python3 .github/build_site.py
+
+      - name: Publish the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp "_site/service.moodycam/service.moodycam-$VERSION.zip" service.moodycam.zip
+          cp "_site/service.moodycam/service.moodycam-$VERSION.zip" .
+          cp _site/repository.moodycam-*.zip .
+          gh release create "$GITHUB_REF_NAME" \
+            service.moodycam.zip "service.moodycam-$VERSION.zip" repository.moodycam-*.zip \
+            --title "MoodyCam $VERSION" \
+            --generate-notes
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  pages:
+    # Publishes _site to https://moodyjim.github.io/moodycam/
+    # (one-time setup: repo Settings -> Pages -> Source: GitHub Actions)
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

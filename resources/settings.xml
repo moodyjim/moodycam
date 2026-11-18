@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings version="1">
+  <section id="service.moodycam">
+
+    <category id="connection" label="32000">
+      <group id="1">
+        <setting id="host" type="string" label="32001">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>32001</heading>
+          </control>
+        </setting>
+        <setting id="api_key" type="string" label="32002">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>32002</heading>
+            <hidden>true</hidden>
+          </control>
+        </setting>
+        <setting id="verify_ssl" type="boolean" label="32003">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+      </group>
+    </category>
+
+    <category id="alerts" label="32010">
+      <group id="1">
+        <setting id="cameras" type="string" label="32011">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>32011</heading>
+          </control>
+        </setting>
+      </group>
+      <group id="2" label="32022">
+        <setting id="ev_person" type="boolean" label="32012">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="ev_package" type="boolean" label="32015">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="ev_ring" type="boolean" label="32016">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="ev_vehicle" type="boolean" label="32013">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="ev_animal" type="boolean" label="32014">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="ev_motion" type="boolean" label="32017">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+      </group>
+      <group id="3">
+        <setting id="cooldown" type="integer" label="32018">
+          <level>0</level>
+          <default>60</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>10</step>
+            <maximum>600</maximum>
+          </constraints>
+          <control type="spinner" format="integer"/>
+        </setting>
+        <setting id="quiet_enabled" type="boolean" label="32019">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="quiet_start" type="integer" label="32020">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>23</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="quiet_enabled">true</dependency>
+          </dependencies>
+          <control type="spinner" format="integer"/>
+        </setting>
+        <setting id="quiet_end" type="integer" label="32021">
+          <level>0</level>
+          <default>7</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>23</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="quiet_enabled">true</dependency>
+          </dependencies>
+          <control type="spinner" format="integer"/>
+        </setting>
+      </group>
+    </category>
+
+    <category id="popup" label="32030">
+      <group id="1">
+        <setting id="duration" type="integer" label="32031">
+          <level>0</level>
+          <default>25</default>
+          <constraints>
+            <minimum>5</minimum>
+            <step>5</step>
+            <maximum>300</maximum>
+          </constraints>
+          <control type="spinner" format="integer"/>
+        </setting>
+        <setting id="position" type="integer" label="32032">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <option label="32040">0</option>
+              <option label="32041">1</option>
+              <option label="32042">2</option>
+              <option label="32043">3</option>
+            </options>
+          </constraints>
+          <control type="spinner" format="string"/>
+        </setting>
+        <setting id="size" type="integer" label="32033">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <options>
+              <option label="32044">0</option>
+              <option label="32045">1</option>
+              <option label="32046">2</option>
+            </options>
+          </constraints>
+          <control type="spinner" format="string"/>
+        </setting>
+        <setting id="refresh_ms" type="integer" label="32034">
+          <level>0</level>
+          <default>1000</default>
+          <constraints>
+            <minimum>250</minimum>
+            <step>250</step>
+            <maximum>5000</maximum>
+          </constraints>
+          <control type="spinner" format="integer"/>
+        </setting>
+        <setting id="high_quality" type="boolean" label="32035">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="pause_playback" type="boolean" label="32036">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+      </group>
+    </category>
+
+    <category id="tools" label="32050">
+      <group id="1">
+        <setting id="test_popup" type="action" label="32051">
+          <level>0</level>
+          <data>RunScript(special://home/addons/service.moodycam/test.py,popup)</data>
+          <control type="button" format="action">
+            <close>true</close>
+          </control>
+        </setting>
+        <setting id="list_cameras" type="action" label="32052">
+          <level>0</level>
+          <data>RunScript(special://home/addons/service.moodycam/test.py,cameras)</data>
+          <control type="button" format="action">
+            <close>true</close>
+          </control>
+        </setting>
+        <setting id="debug" type="boolean" label="32053">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+      </group>
+    </category>
+
+  </section>
+</settings>
