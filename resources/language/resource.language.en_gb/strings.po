@@ -146,3 +146,19 @@ msgstr ""
 msgctxt "#32053"
 msgid "Log every event (for troubleshooting)"
 msgstr ""
+
+msgctxt "#32060"
+msgid "Unavailable"
+msgstr ""
+
+msgctxt "#32061"
+msgid "Showing the first 9 cameras"
+msgstr ""
+
+msgctxt "#32062"
+msgid "None of the cameras in \"Cameras to watch\" were found. Check the names with Tools > List my cameras."
+msgstr ""
+
+msgctxt "#32063"
+msgid "The camera view closed because of an error. kodi.log has the details."
+msgstr ""

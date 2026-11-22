@@ -25,6 +25,29 @@ def _media(name):
     return os.path.join(path, "resources", "media", name)
 
 
+class PlaybackPauser(object):
+    """Pauses what's playing, and later resumes it only if we were the ones
+    who paused it (so we never un-pause something the user paused)."""
+
+    def __init__(self, player=None):
+        self.player = player or xbmc.Player()
+        self.paused_by_us = False
+
+    def pause(self, video_only=True):
+        self.paused_by_us = False
+        playing = self.player.isPlayingVideo() if video_only else self.player.isPlaying()
+        if playing and not xbmc.getCondVisibility("Player.Paused"):
+            self.player.pause()
+            self.paused_by_us = True
+
+    def resume(self):
+        if not self.paused_by_us:
+            return
+        self.paused_by_us = False
+        if self.player.isPlaying() and xbmc.getCondVisibility("Player.Paused"):
+            self.player.pause()   # pause() toggles, so this resumes
+
+
 class _Window(xbmcgui.WindowDialog):
     # No custom __init__ arguments on purpose: Kodi's window classes don't
     # like extra constructor arguments, so the layout is built in build().
@@ -78,10 +101,9 @@ class PopupController(object):
         self.started = 0
         self.expires = 0
         self.next_refresh = 0
-        self.paused_by_us = False
+        self.pauser = PlaybackPauser()
         self.counter = 0
         self.files = []
-        self.player = xbmc.Player()
         self.tmp = xbmcvfs.translatePath("special://temp/moodycam/")
         if not os.path.isdir(self.tmp):
             os.makedirs(self.tmp)
@@ -99,7 +121,8 @@ class PopupController(object):
             self.win = _Window()
             self.win.build(x, y, w, h)
             self.win.show()
-            self._maybe_pause()
+            if cfg.pause:
+                self.pauser.pause(video_only=True)
         self.cam_id = cam_id
         self.cam_name = cam_name
         self.kinds_text = describe(kinds)
@@ -130,22 +153,12 @@ class PopupController(object):
             except Exception:
                 pass
             del win
-        if self.paused_by_us:
-            self.paused_by_us = False
-            if self.player.isPlayingVideo() and xbmc.getCondVisibility("Player.Paused"):
-                self.player.pause()   # pause() toggles, so this resumes
+        self.pauser.resume()
         for path in self.files:
             self._delete(path)
         self.files = []
 
     # ---- helpers ----------------------------------------------------------
-    def _maybe_pause(self):
-        self.paused_by_us = False
-        if self.cfg.pause and self.player.isPlayingVideo() \
-                and not xbmc.getCondVisibility("Player.Paused"):
-            self.player.pause()
-            self.paused_by_us = True
-
     def _update_label(self):
         if self.win is None:
             return

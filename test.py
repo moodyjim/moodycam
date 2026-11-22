@@ -20,29 +20,16 @@ for _name in [m for m in sys.modules if m == "resources" or m.startswith("resour
 import xbmc
 import xbmcgui
 
-from resources.lib.config import Config
+from resources.lib.config import Config, load_cameras
 from resources.lib.popup import PopupController
-from resources.lib.protect import Protect
-
-
-def _fail(msg):
-    xbmcgui.Dialog().ok("MoodyCam", msg)
 
 
 def main(mode):
     cfg = Config()
-    if not cfg.host or not cfg.api_key:
-        _fail("Add your UniFi Protect address and API key in the add-on settings first.")
+    loaded = load_cameras(cfg)
+    if loaded is None:
         return
-    api = Protect.from_config(cfg)
-    try:
-        cams = api.cameras()
-    except Exception as e:
-        _fail("Could not reach UniFi Protect at %s.[CR][CR]%s" % (cfg.host, e))
-        return
-    if not cams:
-        _fail("Connected, but UniFi didn't report any cameras.")
-        return
+    api, cams = loaded
 
     if mode == "cameras":
         lines = ["%s%s" % (name, "   [COLOR FF4CAF50](watched)[/COLOR]" if cfg.wants_camera(name) else "")

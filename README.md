@@ -59,6 +59,32 @@ again. Your settings are kept.
 
 That's it. MoodyCam runs in the background whenever Kodi is on.
 
+## Full-screen view
+
+MoodyCam can also show your cameras full screen, up to 9 at once: one
+camera fills the screen, 2 sit side by side, 3–4 make a 2×2 grid and 5–9 a
+3×3 grid. It shows the cameras from **Cameras to watch**, in the order you
+typed them, or all cameras if that's blank. Pictures refresh at the
+**Picture refresh** rate.
+
+**Opening it**
+- From Kodi: Add-ons → Program add-ons → **MoodyCam**.
+- From a skin's menu or a button: have it run
+  `RunScript(service.moodycam,fullscreen)`.
+- Over SSH (CoreELEC/LibreELEC):
+  `kodi-send --action="RunScript(service.moodycam,fullscreen)"`
+
+**Remote control**
+- **Arrow keys**: move the red highlight between cameras.
+- **OK / Select**: show the highlighted camera on its own, full screen.
+- **Back**: from a single camera, return to the grid; from the grid, close
+  the view.
+
+Anything playing is paused while the view is open and resumes when you close
+it. Corner pop-ups are switched off while the view is open (the cameras are
+already on screen). If a camera can't be reached, its tile says
+**Unavailable** and the others keep working.
+
 ## Settings
 
 **Connection**

@@ -22,6 +22,7 @@ sys.path.insert(0, _HERE)
 
 import xbmc
 
+from resources.lib import fullscreen
 from resources.lib.config import Config, log, notify
 from resources.lib.events import EventTracker
 from resources.lib.popup import PopupController
@@ -157,6 +158,8 @@ class Service(xbmc.Monitor):
                 elif kind == "event":
                     cams = self._handle_event(payload, cfg, api, tracker, popup, cams)
 
+            if popup.showing and fullscreen.is_open():
+                popup.close()   # the full-screen view just opened over it
             popup.tick()
             if self.waitForAbort(0.1 if popup.showing else 0.5):
                 break
@@ -192,7 +195,12 @@ class Service(xbmc.Monitor):
         new = tracker.should_alert(eid, cam_id, wanted, time.time(), cfg.cooldown,
                                    bypass_cooldown=same_cam_up)
         if new:
-            popup.show(cfg, api, cam_id, name, new)
+            if fullscreen.is_open():
+                # The cameras are already on screen. The event still counts
+                # (cooldown), so it doesn't pop up as soon as the view closes.
+                log("no pop-up for %s: the full-screen view is open" % name)
+            else:
+                popup.show(cfg, api, cam_id, name, new)
         return cams
 
 
